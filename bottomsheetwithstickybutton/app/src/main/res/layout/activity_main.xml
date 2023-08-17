@@ -2,22 +2,56 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <ListView
-            android:id="@+id/listViewOptions"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/parent_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="32dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:background="#FFFFFF"
+            android:elevation="2dp"
             app:behavior_hideable="false"
-            app:behavior_peekHeight="200dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
+            app:behavior_peekHeight="300dp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/childView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:id="@+id/promocontainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rclist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintTop_toBottomOf="@+id/promocontainer"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/rc_item" />
+
+                <FrameLayout
+                    android:id="@+id/detailscontainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/rclist" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
         <Button
             android:id="@+id/btnContinueConfirmPayment"
